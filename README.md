@@ -11,6 +11,7 @@
 ##############################################################
 
 This phase of this project entails:
+
   -creating of the base models of the project which we're going to use later in the 
    project.
    
