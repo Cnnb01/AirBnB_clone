@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
+from models.__init__ import storage
 
 
 class BaseModel:
@@ -9,12 +10,15 @@ class BaseModel:
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         self.kwargs = kwargs
+        if not kwargs:
+            storage.new(self)
 
     def __str__(self):
         return f"{self.__class__.__name__} {self.id}"
 
     def save(self):
         self.updated_at = datetime.now()
+        storage.save()
         return self.updated_at
 
     def to_dict(self):
