@@ -1,10 +1,14 @@
 ###########################################################
+
 #Charity and Dennis alx S.E 
 #Team project  
   *AirBnB clone - The console
 ##############################################################
+
 # Phase 1
+
 ##############################################################
+
 This phase of this project entails:
   -creating of the base models of the project which we're going to use later in the 
    project.
