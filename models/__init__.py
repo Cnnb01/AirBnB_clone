@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import importlib
 __all__ = ["base_model"]
 from models.engine.file_storage import FileStorage
 storage = FileStorage()

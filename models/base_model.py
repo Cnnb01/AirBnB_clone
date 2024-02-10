@@ -1,33 +1,34 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
-from models.__init__ import storage
-
+import models
 
 class BaseModel:
     def __init__(self, *args, **kwargs):
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-        self.kwargs = kwargs
-        if not kwargs:
-            storage.new(self)
+        if not kwargs:#if no key words, a new instance is created
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            models.storage.new(self)
+        else:#if there are key words, it sets the attributes based on the provided kw, then if the dates are provided they are converted to objects
+            for k, v in kwargs.items():
+                setattr(self, k, v)
+            if 'created_at' in kwargs:
+                self.created_at = datetime.fromisoformat(self.created_at)
+            if 'updated_at' in kwargs:
+                self.updated_at = datetime.fromisoformat(self.updated_at)
 
     def __str__(self):
         return f"{self.__class__.__name__} {self.id}"
 
     def save(self):
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
         return self.updated_at
 
     def to_dict(self):
-        self.created_at = self.created_at.isoformat()
-        self.updated_at = self.updated_at.isoformat()
+        dict_copy = self.__dict__.copy()
+        dict_copy['created_at'] = self.created_at.isoformat()
+        dict_copy['updated_at'] = self.updated_at.isoformat()
+        return dict_copy
 
-        if self.kwargs:
-            for k, v in self.kwargs.items():
-                setattr(self, k, v)
-        self.created_at = datetime.fromisoformat(self.created_at)
-        self.updated_at = datetime.fromisoformat(self.updated_at)
-        return self.__dict__
