@@ -57,10 +57,9 @@ class BaseModel:
             # on the provided kw, then if the dates are provided convert 2 objs
             for k, v in kwargs.items():
                 setattr(self, k, v)
-            if 'created_at' in kwargs:
-                self.created_at = datetime.fromisoformat(self.created_at)
-            if 'updated_at' in kwargs:
-                self.updated_at = datetime.fromisoformat(self.updated_at)
+            if 'created_at' in kwargs and 'updated_at' in kwargs:
+                self.created_at = datetime.fromisoformat(kwargs['created_at'])
+                self.updated_at = datetime.fromisoformat(kwargs['updated_at'])
 
     def __str__(self):
         """
@@ -93,6 +92,7 @@ class BaseModel:
 
         """
         dict_copy = self.__dict__.copy()
+        dict_copy['__class__'] = self.__class__.__name__
         dict_copy['created_at'] = self.created_at.isoformat()
         dict_copy['updated_at'] = self.updated_at.isoformat()
         return dict_copy
