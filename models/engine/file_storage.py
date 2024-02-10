@@ -84,6 +84,11 @@ class FileStorage:
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as file:
                 try:
-                    self.__objects = json.load(file)
+                    loaded_objects = json.load(file)
+                    for key, value in loaded_objects.items():
+                        class_name, obj_id = key.split('.')
+                        class_ = getattr(models, class_name)
+                        instance = class_(**value)
+                        self.__objects[key] = instance.to_dict()
                 except json.JSONDecodeError:
                     self.__objects = {}
