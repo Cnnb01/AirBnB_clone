@@ -18,6 +18,8 @@ Methods:
     reload: Deserializes the JSON file to populate the storage dictionary.
 
 """
+
+
 import json
 import os
 from models.base_model import BaseModel
@@ -40,6 +42,7 @@ class FileStorage:
         reload: Deserializes the JSON file to populate the storage dictionary.
 
     """
+
     __file_path = "file.json"
     __objects = {}
 
