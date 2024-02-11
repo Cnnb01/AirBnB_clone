@@ -76,7 +76,7 @@ class FileStorage:
         """
         obj_dict = {}
         for obj in self.__objects.values():
-            obj_dict[obj['__class__'] + '.' + obj['id']] = obj
+            obj_dict[obj['__class__'] + '.' + obj['id']] = obj# .to_dict()
         with open(self.__file_path, "w") as file:
             json.dump(obj_dict, file)
 
