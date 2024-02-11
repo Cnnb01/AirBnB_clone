@@ -28,9 +28,15 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn(key, all_objects)
         self.assertEqual(all_objects[key], obj.to_dict())
 
-    def test_save_reload(self):
-        """tests the save and reload method"""
-        models.storage = FileStorage()
+    def test_save(self):
+        """tests the save method"""
+        obj = BaseModel()
+        update = obj.updated_at
+        obj.save()
+        self.assertLess(update, obj.updated_at)
+
+    def test_reload(self):
+        """tests the reload method"""
         obj = BaseModel()
         models.storage.new(obj)
         models.storage.save()
