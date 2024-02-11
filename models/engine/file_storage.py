@@ -23,6 +23,7 @@ Methods:
 import json
 import os
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -84,6 +85,9 @@ class FileStorage:
         Deserializes the JSON file to populate the storage dictionary.
 
         """
+        alist={
+            'User': User
+        }
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as file:
                 try:
