@@ -69,7 +69,7 @@ class BaseModel:
             str: A string representation of the instance.
 
         """
-        return f"{self.__class__.__name__} {self.id}"
+        return f"{self.__class__.__name__} {self.id} {self.__dict__}"
 
     def save(self):
         """
