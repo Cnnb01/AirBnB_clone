@@ -85,9 +85,6 @@ class FileStorage:
         Deserializes the JSON file to populate the storage dictionary.
 
         """
-        alist={
-            'User': User
-        }
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as file:
                 try:
