@@ -28,12 +28,22 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn(key, all_objects)
         self.assertEqual(all_objects[key], obj.to_dict())
 
+    # def test_save(self):
+    #     """tests the save method"""
+    #     import models
+    #     obj = BaseModel()
+    #     models.storage.new(obj)
+    #     models.storage.save()
+    #     self.assertTrue(os.path.exists(models.storage._FileStorage.__file_path))
+
     def test_save(self):
-        """tests the save method"""
-        obj = BaseModel()
-        update = obj.updated_at
-        obj.save()
-        self.assertLess(update, obj.updated_at)
+        basemodel = BaseModel()
+        models.storage.new(basemodel)
+        models.storage.save()
+        save_text = ""
+        with open("file.json", "r") as f:
+            save_text = f.read()
+            self.assertIn("BaseModel." + basemodel.id, save_text)
 
     def test_reload(self):
         """tests the reload method"""
@@ -43,7 +53,7 @@ class TestFileStorage(unittest.TestCase):
         new_storage = FileStorage()
         new_storage.reload()
         all_objects = new_storage.all()
-        key = f"{obj.__class__.__name__}{obj.id}"
+        key = f"{obj.__class__.__name__}.{obj.id}"
         self.assertIn(key, all_objects)
         self.assertEqual(all_objects[key], obj.to_dict())
 
