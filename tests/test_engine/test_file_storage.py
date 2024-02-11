@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Defines unittests for file_storage.py."""
+import os
+import json
 import unittest
 from models.base_model import BaseModel
 import models
