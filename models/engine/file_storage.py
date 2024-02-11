@@ -90,6 +90,15 @@ class FileStorage:
         Deserializes the JSON file to populate the storage dictionary.
 
         """
+        alist = {
+            'BaseModel': BaseModel,
+            'State': State,
+            'City': City,
+            'Amenity': Amenity,
+            'Place': Place,
+            'Review': Review,
+            'User': User
+        }
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as file:
                 try:
