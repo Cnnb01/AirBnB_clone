@@ -24,6 +24,11 @@ import json
 import os
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class FileStorage:
@@ -85,6 +90,15 @@ class FileStorage:
         Deserializes the JSON file to populate the storage dictionary.
 
         """
+        alist = {
+            'BaseModel': BaseModel,
+            'State': State,
+            'City': City,
+            'Amenity': Amenity,
+            'Place': Place,
+            'Review': Review,
+            'User': User
+        }
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as file:
                 try:

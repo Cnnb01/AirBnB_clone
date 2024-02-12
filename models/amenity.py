@@ -4,10 +4,7 @@
 from models.base_model import BaseModel
 
 
-class User(BaseModel):
+class Amenity(BaseModel):
     """Child class of BaseModel"""
 
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
+    name = ""
